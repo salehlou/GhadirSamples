@@ -5,11 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MaterialModule } from './material.module';
-
+import { JalaliMomentsPipe } from './_pip/jalali-moment.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    JalaliMomentsPipe
   ],
   imports: [
     BrowserModule,
@@ -17,7 +18,9 @@ import { MaterialModule } from './material.module';
     MaterialModule
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

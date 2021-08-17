@@ -6,7 +6,8 @@ import { TableComponent } from './table.component';
 import { GroupingComponent } from './grouping/grouping.component';
 import { SimpleComponent } from './simple/simple.component';
 import { ExpandedComponent } from './expanded/expanded.component';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from 'src/app/material.module';
+import { JalaliMomentsPipe } from 'src/app/_pip/jalali-moment.pipe';
 
 
 @NgModule({
@@ -14,7 +15,9 @@ import { MaterialModule } from '../material.module';
     TableComponent,
     GroupingComponent,
     SimpleComponent,
-    ExpandedComponent
+    ExpandedComponent,
+    JalaliMomentsPipe
+
   ],
   imports: [
     CommonModule,
