@@ -1,0 +1,57 @@
+<div class="card card-custom">
+   <div class="card-body" style="overflow-y: scroll;">
+      <div class="form form-label-right">
+         <div style="padding: 5px 30px 5px 30px;">
+            <mat-form-field appearance="legacy">
+               <mat-icon matSuffix>search</mat-icon>
+               <mat-label>جستجو</mat-label>
+               <input matInput placeholder="جستجو" #input>
+               <!-- (keyup)="filterChanged($event.target)" -->
+               <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+            <mat-divider></mat-divider>
+         </div>
+         <div>
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+               <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding
+                  [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}"
+                  (mouseover)="node.hovered = true" (mouseout)="node.hovered = false">
+
+                  <button mat-icon-button disabled></button>
+                  <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
+                     [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
+                  </mat-checkbox>
+                  <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
+                  <span class="node-align">
+                     {{node.name}}
+                  </span>
+                  <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
+                     matTooltip="دسترسی ویرایش">
+                  </mat-slide-toggle>
+               </mat-tree-node>
+               <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding
+                  [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}"
+                  (mouseover)="node.hovered = true" (mouseout)="node.hovered = false">
+                  <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                     <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                     </mat-icon>
+                  </button>
+                  <mat-checkbox (change)="itemSelectionToggle(node)"
+                     [indeterminate]="descendantsPartiallySelected(node)" [checked]="descendantsAllSelected(node)"
+                     matTooltip="دسترسی نمایش">
+                  </mat-checkbox>
+                  <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
+                  <span class="node-align">
+                     {{node.name}}
+                  </span>
+                  <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
+                     matTooltip="دسترسی ویرایش">
+                  </mat-slide-toggle>
+               </mat-tree-node>
+            </mat-tree>
+         </div>
+      </div>
+   </div>
+
+</div>
