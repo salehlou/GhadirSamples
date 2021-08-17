@@ -46,3 +46,4 @@ export class SimpleComponent implements OnInit {
       this.dataSourceTable.paginator.firstPage();
     }
   }
+}
