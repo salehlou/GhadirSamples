@@ -33,7 +33,7 @@ export class SimpleComponent implements OnInit {
   }
 
   loadPersons() {
-    this.dataSourceTable = new MatTableDataSource(res.items);
+    this.dataSourceTable = SIMPLE_TABLE_DATA.data;
     this.dataSourceTable.paginator = this.paginator;
     this.dataSourceTable.sort = this.sort;
 

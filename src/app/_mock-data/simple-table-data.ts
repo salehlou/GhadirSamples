@@ -1,4 +1,4 @@
-const TREE_DATA = {
+const SIMPLE_TABLE_DATA = {
    "data": [
       {
          "id": 1,
