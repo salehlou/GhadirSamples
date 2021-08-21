@@ -36,6 +36,10 @@ export class FlatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.responseTree = this.getNodeChildren(0, FLAT_TREE_DATA.data);
+    this.dataChange.next(this.responseTree);
+    this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+    this.treeControl.expandAll();
   }
 
   getNodeChildren(parentId: number, treeData: TreeData[]): TreeModel[] {

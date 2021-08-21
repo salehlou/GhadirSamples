@@ -1,22 +1,21 @@
 <div class="card card-custom">
    <div class="card-body" style="overflow-y: scroll;">
       <div class="form form-label-right">
-         <div style="padding: 5px 30px 5px 30px;">
+         <!--     <div style="padding: 5px 30px 5px 30px;">
             <mat-form-field appearance="legacy">
                <mat-icon matSuffix>search</mat-icon>
                <mat-label>جستجو</mat-label>
                <input matInput placeholder="جستجو" #input>
-               <!-- (keyup)="filterChanged($event.target)" -->
-               <!-- <mat-hint>Hint</mat-hint> -->
-            </mat-form-field>
+             (keyup)="filterChanged($event.target)"
+                <mat-hint>Hint</mat-hint> 
+            </mat-form-field> 
             <mat-divider></mat-divider>
-         </div>
+         </div>-->
          <div>
             <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding
                   [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}"
                   (mouseover)="node.hovered = true" (mouseout)="node.hovered = false">
-
                   <button mat-icon-button disabled></button>
                   <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
                      [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
