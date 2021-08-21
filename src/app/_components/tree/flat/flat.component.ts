@@ -1,13 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { FLAT_TREE_DATA } from 'src/app/_mock-data/flat-tree-data';
 import { FlatNode } from 'src/app/_models/flatNode.model';
 import { TreeData } from 'src/app/_models/tree-data.model';
 import { TreeModel } from 'src/app/_models/tree.model';
-import { TreeService } from 'src/app/_services/tree.service';
 
 @Component({
   selector: 'app-flat',
@@ -15,50 +15,93 @@ import { TreeService } from 'src/app/_services/tree.service';
   styleUrls: ['./flat.component.scss']
 })
 export class FlatComponent implements OnInit {
+  @ViewChild(MatMenuTrigger)
+  contextMenu!: MatMenuTrigger;
+  contextMenuPosition = { x: '0px', y: '0px' };
 
-
-  sendResponse: TreeData[] = [];
-  responseTree: TreeModel[] = [];
-
-  currentRow = -1;
-
-
+  subscription: Subscription | undefined;
   selectionTree = new SelectionModel<TreeModel>(false, []);
+
   dataChange = new BehaviorSubject<TreeModel[]>([]);
+  responseTree: TreeModel[] = [
+    {
+      id: 0,
+      name: 'string',
+      checked: false,
+      iconId: 'string',
+      write: false,
+      children: [],
+    }
+  ];
+  sendResponse: TreeData[] = [
+    {
+      checked: false,
+      iconId: '',
+      id: 0,
+      name: '',
+      parentId: 0,
+      write: false
+    }
+  ];
 
   treeControl: FlatTreeControl<FlatNode>;
   treeFlattener: MatTreeFlattener<TreeModel, FlatNode>;
   dataSource: MatTreeFlatDataSource<TreeModel, FlatNode>;
   checklistSelection = new SelectionModel<FlatNode>(true);
 
-
-  constructor(treeService: TreeService) {
+  currentRow = -1;
+  constructor() {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
+    this.sendResponse = FLAT_TREE_DATA.data;
     this.responseTree = this.getNodeChildren(0, FLAT_TREE_DATA.data);
     this.dataChange.next(this.responseTree);
-    // this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
-    // this.treeControl.expandAll();
+    if (this.treeControl.dataNodes) {
+      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+    }
 
+    // this.subscription = this.rolesService.selecedRoleId.subscribe(() => {
+    //   this.rolesService.getList(1).subscribe(
+    //     res => {
+    //       if (res.success) {
+    //         this.sendResponse = res.data;
+    //         this.responseTree = this.getNodeChildren(0, res.data);
+    //         this.dataChange.next(this.responseTree);
+    //         this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+    //         this.treeControl.expandAll();
+    //       } else {
+    //         console.log(res.message);
+    //       }
+    //     });
+    // });
   }
-
   getLevel = (node: FlatNode) => node.level;
   isExpandable = (node: FlatNode) => node.expandable;
   getChildren = (node: TreeModel): TreeModel[] => node.children;
   hasChild = (_: number, nodeData: FlatNode) => nodeData.expandable;
+  ngOnInit() {
+    this.dataChange.subscribe(data => {
+      this.dataSource.data = data;
+      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+      this.treeControl.expandAll();
+    });
+  }
 
-  ngOnInit(): void { }
+  ngOnDestroy() {
+    this.dataChange.unsubscribe();
+    (this.subscription) ? this.subscription.unsubscribe() : null;
+  }
 
   getNodeChildren(parentId: number, treeData: TreeData[]): TreeModel[] {
     const result = treeData.filter((data) => data.parentId === parentId);
     if (result.length === 0) {
-      return result.map<TreeModel>(data => {
+      return result.map<TreeModel>((data) => {
         return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: [] };
       });
     } else {
-      return result.map<TreeModel>(data => {
+      return result.map<TreeModel>((data) => {
         return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: this.getNodeChildren(data.id, treeData) };
       });
     }
@@ -134,34 +177,52 @@ export class FlatComponent implements OnInit {
     }
     return null;
   }
-  changeStatusWrite(node: FlatNode) {
-    this.sendResponse[node.id - 1].write = !this.sendResponse[node.id - 1].write;
-    this.responseTree = this.getNodeChildren(0, this.sendResponse);
-  }
-  filterChanged(event: Event) {
-    const filterText = (event.target as HTMLInputElement).value;
+
+  filterChanged(filterText: string) {
     this.filter(filterText);
     this.treeControl.expandAll();
   }
 
   filter(filterText: string) {
-    // let filteredTreeData;
-    // if (filterText) { filteredTreeData = this.getObjects(this.responseTree, filterText); }
-    // else { filteredTreeData = this.responseTree; }
-    // this.dataChange.next(filteredTreeData);
+    let filteredTreeData;
+    if (this.responseTree) {
+      if (filterText) { filteredTreeData = this.getObjects(this.responseTree, filterText) }
+      else { filteredTreeData = this.responseTree; }
+      this.dataChange.next(filteredTreeData);
+    }
+
   }
 
-  getObjects(array: any[], target: string) {
+  getObjects(array: TreeModel[], target: string) {
     return array.reduce((r, { id, name, checked, iconId, write, children = [] }) => {
       children = this.getObjects(children, target);
       if (name.includes(target)) {
-        r.push({ id, name, checked, iconId, write, children });
+        r.push();
         return r;
       }
       if (children.length) {
-        r.push({ id, name, checked, iconId, write, children });
+        r.push();
       }
       return r;
     }, []);
   }
+
+  changeStatusWrite(node: FlatNode) {
+    (this.sendResponse) ? this.sendResponse[node.id - 1].write = !this.sendResponse[node.id - 1].write : null;
+    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
+  }
+
+  changeStatusChecked(node: FlatNode) {
+    (this.sendResponse) ? this.sendResponse[node.id - 1].checked = !this.sendResponse[node.id - 1].checked : null;
+    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
+  }
+
+  save() {
+    // this.rolesService.setList(this.sendResponse).subscribe(
+    //   res => {
+    //   }
+    // );
+  }
+
+
 }
