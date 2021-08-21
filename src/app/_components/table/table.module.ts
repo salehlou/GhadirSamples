@@ -6,7 +6,7 @@ import { TableComponent } from './table.component';
 import { GroupingComponent } from './grouping/grouping.component';
 import { SimpleComponent } from './simple/simple.component';
 import { ExpandedComponent } from './expanded/expanded.component';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({

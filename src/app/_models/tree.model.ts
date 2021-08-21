@@ -1,18 +1,12 @@
 export class TreeModel {
-   id: number;
-   name: string;
-   checked: boolean;
-   iconId: string;
-   write: boolean;
-   children: TreeModel[];
-   constructor(id: number, name: string, checked: boolean, iconId: string, write: boolean, children: TreeModel[]) {
-      this.id = id;
-      this.name = name;
-      this.checked = checked;
-      this.write = write;
-      this.iconId = iconId;
-      this.children = children;
 
-   }
-
+   public children: TreeModel[] = []
+   
+   constructor(
+      public id: number,
+      public name: string,
+      public checked: boolean,
+      public iconId: string,
+      public write: boolean
+   ) { }
 }
