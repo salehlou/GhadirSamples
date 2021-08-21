@@ -3,6 +3,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
+import { FLAT_TREE_DATA } from 'src/app/_mock-data/flat-tree-data';
 import { FlatNode } from 'src/app/_models/flatNode.model';
 import { TreeData } from 'src/app/_models/tree-data.model';
 import { TreeModel } from 'src/app/_models/tree.model';

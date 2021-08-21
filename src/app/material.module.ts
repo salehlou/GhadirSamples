@@ -10,6 +10,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -26,7 +27,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTreeModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule
   ],
   exports: [
     MatMenuModule,
@@ -38,7 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTreeModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

@@ -1,4 +1,4 @@
-const FLAT_TREE_DATA = {
+export const FLAT_TREE_DATA = {
    "data": [
       {
          checked: true,
