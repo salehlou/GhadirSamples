@@ -1,10 +1,9 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-      <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
+      <img [src]="node.iconId" alt="" class="iconIdSize">
       {{node.name}}
       <div style="display: flex; flex: 1; justify-content: flex-end;">
-         <span style="display: flex; flex: 1; justify-content: flex-end;">
-         </span>
+         <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
          <span style="display: flex; justify-content: flex-end;">
             <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
                [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
@@ -21,11 +20,11 @@
                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
          </button>
-         <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
+         <img [src]="node.iconId" alt="" class="iconIdSize">
+
          {{node.name}}
          <div style="display: flex; flex: 1; justify-content: flex-end;">
-            <span style="display: flex; flex: 1; justify-content: flex-end;">
-            </span>
+            <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
             <span style="display: flex; justify-content: flex-end;">
                <mat-checkbox (change)="itemSelectionToggle(node)" [indeterminate]="descendantsPartiallySelected(node)"
                   [checked]="descendantsAllSelected(node)" matTooltip="دسترسی نمایش">

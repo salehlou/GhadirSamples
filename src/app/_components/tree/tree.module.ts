@@ -6,6 +6,7 @@ import { TreeComponent } from './tree.component';
 import { FlatComponent } from './flat/flat.component';
 import { NestedComponent } from './nested/nested.component';
 import { MaterialModule } from 'src/app/material.module';
+import { SampleComponent } from './sample/sample.component';
 
 
 
@@ -14,6 +15,7 @@ import { MaterialModule } from 'src/app/material.module';
     TreeComponent,
     FlatComponent,
     NestedComponent,
+    SampleComponent,
   ],
   imports: [
     CommonModule,
