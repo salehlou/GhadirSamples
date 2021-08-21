@@ -15,7 +15,7 @@ import { TreeModel } from 'src/app/_models/tree.model';
 export class FlatComponent implements OnInit {
 
   dataChange = new BehaviorSubject<TreeModel[]>([]);
-  sendResponse: TreeData[] =[];
+  sendResponse: TreeData[] = [];
   responseTree: TreeModel[] = [];
 
   selectionTree = new SelectionModel<TreeModel>(false, []);
@@ -42,7 +42,7 @@ export class FlatComponent implements OnInit {
     const result = treeData.filter((data) => data.parentId === parentId);
     if (result.length === 0) {
       return result.map<TreeModel>(data => {
-        return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, };
+        return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: [] };
       });
     } else {
       return result.map<TreeModel>(data => {
