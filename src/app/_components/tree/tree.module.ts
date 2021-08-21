@@ -13,7 +13,7 @@ import { MaterialModule } from 'src/app/material.module';
   declarations: [
     TreeComponent,
     FlatComponent,
-    NestedComponent
+    NestedComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,14 @@
+.mat-tree-node {
+  min-height: 10px !important;
+  margin-top: -5px !important;
+}
+
+.iconIdSize {
+  max-width: 32px;
+  max-height: 32px;
+}
+
+.mat-tree-node.hovered {
+  cursor: pointer;
+  background-color: #bfd7ea;
+}

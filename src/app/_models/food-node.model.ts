@@ -5,4 +5,5 @@ export interface FoodNode {
    id: number;
    name: string;
    write: boolean;
+   level: number;
 }

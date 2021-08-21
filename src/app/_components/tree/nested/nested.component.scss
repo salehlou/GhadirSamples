@@ -24,3 +24,15 @@
 .example-tree div[role=group]>.mat-tree-node {
   padding-left: 40px;
 }
+
+
+
+.iconIdSize {
+  max-width: 32px;
+  max-height: 32px;
+}
+
+.mat-tree-node.hovered {
+  cursor: pointer;
+  background-color: #bfd7ea;
+}

@@ -8,23 +8,23 @@ export const NESTED_TREE_DATA: FoodNode[] =
          iconId: '',
          id: 1,
          name: "رابط کاربری",
-         write: false,
+         level: 0, write: true,
          children: [
             {
-               checked: false,
+               checked: true,
                iconId: '',
                id: 2,
                name: "اطلاعات پایه",
-               write: false,
+               level: 0, write: true,
                children: [
 
                   {
-                     checked: false,
+                     checked: true,
                      iconId: '',
                      id: 9,
                      name: "پرسنل",
                      children: [],
-                     write: false
+                     level: 0, write: true
                   },
                   {
                      checked: false,
@@ -32,25 +32,25 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 10,
                      name: "ایستگاه های کنترل",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
-                     checked: false,
+                     checked: true,
                      iconId: '',
                      id: 11,
                      name: "دستگاه ها",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
 
                ]
             },
             {
-               checked: false,
+               checked: true,
                iconId: '',
                id: 3,
                name: "زیر سیستم ها",
-               write: false,
+               level: 0, write: true,
                children: [
                   {
                      checked: false,
@@ -59,12 +59,12 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      name: "اکسس کنترل",
                      children: [
                         {
-                           checked: false,
+                           checked: true,
                            iconId: '',
                            id: 17,
                            name: "گروه های دسترسی",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                         {
                            checked: false,
@@ -72,7 +72,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                            id: 18,
                            name: "درب ها",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                         {
                            checked: false,
@@ -80,10 +80,10 @@ export const NESTED_TREE_DATA: FoodNode[] =
                            id: 19,
                            name: "آسانسور ها",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                      ],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -92,28 +92,28 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      name: "ارباب رجوع",
                      children: [
                         {
-                           checked: false,
+                           checked: true,
                            iconId: '',
                            id: 20,
                            name: "مراجعین",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                         {
-                           checked: false,
+                           checked: true,
                            iconId: '',
                            id: 21,
                            name: "آفیش",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                         {
-                           checked: false,
+                           checked: true,
                            iconId: '',
                            id: 22,
                            name: "اقلام همراه",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                         {
                            checked: false,
@@ -121,7 +121,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                            id: 23,
                            name: "لیست سیاه",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         },
                         {
                            checked: false,
@@ -129,10 +129,10 @@ export const NESTED_TREE_DATA: FoodNode[] =
                            id: 36,
                            name: "جریان کاری",
                            children: [],
-                           write: false
+                           level: 0, write: false
                         }
                      ],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -140,7 +140,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 14,
                      name: "صندوق امانات",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -148,15 +148,15 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 15,
                      name: "پارکینگ",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
-                     checked: false,
+                     checked: true,
                      iconId: '',
                      id: 16,
                      name: "مدیریت باشگاه های ورزشی",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                ],
             },
@@ -165,7 +165,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                iconId: '',
                id: 4,
                name: "سطوح دسترسی و کاربران",
-               write: false,
+               level: 0, write: false,
                children: [
                   {
                      checked: false,
@@ -173,32 +173,32 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 24,
                      name: "کاربران",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
-                     checked: false,
+                     checked: true,
                      iconId: '',
                      id: 25,
                      name: "نقش ها",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                ],
             },
             {
-               checked: false,
+               checked: true,
                iconId: '',
                id: 5,
                name: "تنظیمات",
-               write: false,
+               level: 0, write: false,
                children: [
                   {
-                     checked: false,
+                     checked: true,
                      iconId: '',
                      id: 26,
                      name: "سرور",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -206,7 +206,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 27,
                      name: "سایر نرم افزار ها",
                      children: [],
-                     write: false
+                     level: 0, write: true
                   },
                ],
             },
@@ -215,7 +215,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                iconId: '',
                id: 6,
                name: "گزارشات",
-               write: false,
+               level: 0, write: true,
                children: [
                   {
                      checked: false,
@@ -223,7 +223,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 28,
                      name: "پایه",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -231,7 +231,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 29,
                      name: "اکسس کنترل",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -239,7 +239,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 30,
                      name: "ارباب رجوع",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -247,7 +247,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 31,
                      name: "صندوق امانات",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -255,7 +255,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 32,
                      name: "پارکینگ",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -263,7 +263,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 33,
                      name: "کاربران",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                ],
             },
@@ -272,7 +272,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                iconId: '',
                id: 7,
                name: "تنظیمات کاربری",
-               write: false,
+               level: 0, write: false,
                children: [
                   {
                      checked: false,
@@ -280,7 +280,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 34,
                      name: "تغییر کلمه عبور",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                   {
                      checked: false,
@@ -288,7 +288,7 @@ export const NESTED_TREE_DATA: FoodNode[] =
                      id: 35,
                      name: "شخصی سازی",
                      children: [],
-                     write: false
+                     level: 0, write: false
                   },
                ],
             },
