@@ -229,7 +229,9 @@ export class FlatComponent implements OnInit {
 
   save() {
 
-    console.log(this.sendResponse);
+    console.log('sendResponse',this.sendResponse);
+
+    console.log('checklistSelection',this.checklistSelection);
 
   }
 
