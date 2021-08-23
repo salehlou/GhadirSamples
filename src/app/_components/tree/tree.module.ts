@@ -20,7 +20,6 @@ import { SampleComponent } from './sample/sample.component';
   imports: [
     CommonModule,
     TreeRoutingModule,
-    MaterialModule
-  ]
+    MaterialModule]
 })
 export class TreeModule { }
