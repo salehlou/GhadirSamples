@@ -178,6 +178,22 @@ export class FlatComponent implements OnInit {
     return null;
   }
 
+
+  changeStatusWrite(node: FlatNode) {
+
+    this.sendResponse.find(x => x.id == node.id).write = !this.sendResponse.find(x => x.id == node.id)?.write;
+
+    (this.sendResponse) ? this.sendResponse[node.id - 1].write = !this.sendResponse[node.id - 1].write : null;
+    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
+  }
+
+  changeStatusChecked(node: FlatNode) {
+    (this.sendResponse) ? this.sendResponse[node.id - 1].checked = !this.sendResponse[node.id - 1].checked : null;
+    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
+  }
+
+
+
   filterChanged(filterText: string) {
     this.filter(filterText);
     this.treeControl.expandAll();
@@ -193,6 +209,7 @@ export class FlatComponent implements OnInit {
 
   }
 
+
   getObjects(array: TreeModel[], target: string) {
     return array.reduce((r, { id, name, checked, iconId, write, children = [] }) => {
       children = this.getObjects(children, target);
@@ -207,21 +224,11 @@ export class FlatComponent implements OnInit {
     }, []);
   }
 
-  changeStatusWrite(node: FlatNode) {
-    (this.sendResponse) ? this.sendResponse[node.id - 1].write = !this.sendResponse[node.id - 1].write : null;
-    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
-  }
-
-  changeStatusChecked(node: FlatNode) {
-    (this.sendResponse) ? this.sendResponse[node.id - 1].checked = !this.sendResponse[node.id - 1].checked : null;
-    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
-  }
 
   save() {
-    // this.rolesService.setList(this.sendResponse).subscribe(
-    //   res => {
-    //   }
-    // );
+
+    console.log(this.sendResponse);
+
   }
 
 
