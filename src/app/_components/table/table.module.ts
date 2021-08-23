@@ -8,7 +8,6 @@ import { SimpleComponent } from './simple/simple.component';
 import { ExpandedComponent } from './expanded/expanded.component';
 import { MaterialModule } from 'src/app/material.module';
 
-
 @NgModule({
   declarations: [
     TableComponent,
