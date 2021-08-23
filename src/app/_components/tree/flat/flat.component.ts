@@ -181,9 +181,9 @@ export class FlatComponent implements OnInit {
 
   changeStatusWrite(node: FlatNode) {
 
-    let ff = this.sendResponse.find(x => x.id == node.id);
-    if (ff) {
-      ff.write = !ff.write;
+    let currentNode = this.sendResponse.find(x => x.id == node.id);
+    if (currentNode) {
+      currentNode.write = !currentNode.write;
       this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
 
