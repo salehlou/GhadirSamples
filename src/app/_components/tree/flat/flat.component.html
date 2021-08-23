@@ -14,7 +14,7 @@
                <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
                <span style="display: flex; justify-content: flex-end;">
 
-                  <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
+                  <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
                      matTooltip="دسترسی ویرایش">
                   </mat-slide-toggle>
                </span>
@@ -38,8 +38,7 @@
             <div style="display: flex; flex: 1; justify-content: flex-end;">
                <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
                <span style="display: flex; justify-content: flex-end;">
-
-                  <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
+                  <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
                      matTooltip="دسترسی ویرایش">
                   </mat-slide-toggle>
                </span>
@@ -51,3 +50,4 @@
 </div>
 
 <button mat-button (click)="save()">Save</button>
+<button mat-button (click)="reset()">Reset</button>
