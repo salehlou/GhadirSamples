@@ -27,13 +27,14 @@ export class FlatComponent implements OnInit {
   sendResponse: TreeData[] = [];
   olddata: TreeData[] = [];
 
+  searchBoxValue: string = '';
   treeControl: FlatTreeControl<FlatNode>;
   treeFlattener: MatTreeFlattener<TreeModel, FlatNode>;
   dataSource: MatTreeFlatDataSource<TreeModel, FlatNode>;
   checklistSelection = new SelectionModel<FlatNode>(true);
 
   currentRow = -1;
-  constructor(private treeService:TreeService) {
+  constructor(private treeService: TreeService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
@@ -46,24 +47,24 @@ export class FlatComponent implements OnInit {
 
 
     //this.subscription = this.rolesService.selecedRoleId.subscribe(() => {
-      this.treeService.getList().then(
-        (res: any) => {
-          if (res) {
+    this.treeService.getList().then(
+      (res: any) => {
+        if (res) {
 
-            this.olddata = res;
-            this.sendResponse = res;
-            
-            this.responseTree = this.getNodeChildren(0, res);
-            this.dataChange.next(this.responseTree);
-            // if (this.treeControl.dataNodes) {
-            //   this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
-            // }
+          this.olddata = res;
+          this.sendResponse = res;
 
-            //this.treeControl.expandAll();
-          } else {
-            console.log(res);
-          }
-        });
+          this.responseTree = this.getNodeChildren(0, res);
+          this.dataChange.next(this.responseTree);
+          // if (this.treeControl.dataNodes) {
+          //   this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+          // }
+
+          //this.treeControl.expandAll();
+        } else {
+          console.log(res);
+        }
+      });
     //});
   }
   getLevel = (node: FlatNode) => node.level;
@@ -186,7 +187,9 @@ export class FlatComponent implements OnInit {
 
 
   filterChanged(filterText: string) {
-    this.filter(filterText);
+    debugger;
+
+    this.filter(this.searchBoxValue);
     this.treeControl.expandAll();
   }
 
@@ -219,7 +222,7 @@ export class FlatComponent implements OnInit {
   }
 
   reset() {
-debugger;
+    debugger;
     this.responseTree = this.getNodeChildren(0, this.olddata);
     this.dataChange.next(this.responseTree);
 
