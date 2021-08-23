@@ -179,7 +179,7 @@ export class FlatComponent implements OnInit {
   }
 
 
-  changeStatusWrite(node: FlatNode) {
+  toggleWriteStatus(node: FlatNode) {
 
     let currentNode = this.sendResponse.find(x => x.id == node.id);
     if (currentNode) {
