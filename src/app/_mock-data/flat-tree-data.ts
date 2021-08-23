@@ -61,7 +61,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: true,
+         checked: false,
          iconId: '',
          id: 8,
          name: "بخش ها",
@@ -77,12 +77,12 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: true,
+         checked: false,
          iconId: '',
          id: 10,
          name: "ایستگاه های کنترل",
          parentId: 2,
-         write: true
+         write: false
       },
       {
          checked: false,

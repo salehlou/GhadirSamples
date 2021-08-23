@@ -116,16 +116,23 @@ export class FlatComponent implements OnInit {
 
   itemSelectionToggle(node: FlatNode): void {
     this.checklistSelection.toggle(node);
+    this.toggleReadStatus(node);
+
     const descendants = this.treeControl.getDescendants(node);
+
     this.checklistSelection.isSelected(node)
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
+
+      descendants.forEach((item,index)=>{
+        this.toggleReadStatus(item);
+      })
+
     this.checkAllParentsSelection(node);
   }
 
   leafItemSelectionToggle(node: FlatNode): void {
     this.checklistSelection.toggle(node);
-
     this.toggleReadStatus(node);
 
     this.checkAllParentsSelection(node);
@@ -180,15 +187,13 @@ export class FlatComponent implements OnInit {
   toggleReadStatus(node: FlatNode) {
     let currentNode = this.sendResponse.find(x => x.id == node.id);
     if (currentNode) {
-      currentNode.checked = !currentNode.checked;
+      currentNode.checked = !node.checked;
       this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
   }
 
 
   filterChanged(filterText: string) {
-    debugger;
-
     this.filter(this.searchBoxValue);
     this.treeControl.expandAll();
   }
@@ -218,11 +223,10 @@ export class FlatComponent implements OnInit {
 
   save() {
     console.log('sendResponse', this.sendResponse);
-    console.log('responseTree', this.responseTree);
+    //console.log('responseTree', this.responseTree);
   }
 
   reset() {
-    debugger;
     this.responseTree = this.getNodeChildren(0, this.olddata);
     this.dataChange.next(this.responseTree);
 
