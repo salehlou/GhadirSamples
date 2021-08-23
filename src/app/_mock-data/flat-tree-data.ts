@@ -1,5 +1,9 @@
-export const FLAT_TREE_DATA = {
-   "data": [
+import { TreeData } from "../_models/tree-data.model";
+
+export const FLAT_TREE_DATA : BaseResponse<TreeData[]> = {
+   success: true,
+   message: '',
+   data: [
       {
          checked: false,
          iconId: '',
@@ -57,7 +61,7 @@ export const FLAT_TREE_DATA = {
       //    write: false
       // },
       {
-         checked: false,
+         checked: true,
          iconId: '',
          id: 8,
          name: "بخش ها",
@@ -73,12 +77,12 @@ export const FLAT_TREE_DATA = {
          write: false
       },
       {
-         checked: false,
+         checked: true,
          iconId: '',
          id: 10,
          name: "ایستگاه های کنترل",
          parentId: 2,
-         write: false
+         write: true
       },
       {
          checked: false,
@@ -291,3 +295,9 @@ export const FLAT_TREE_DATA = {
    ],
 
 };
+
+export interface BaseResponse<T> {
+   success: boolean;
+   message: string;
+   data: T;
+}

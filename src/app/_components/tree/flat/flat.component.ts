@@ -4,10 +4,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { FLAT_TREE_DATA } from 'src/app/_mock-data/flat-tree-data';
 import { FlatNode } from 'src/app/_models/flatNode.model';
 import { TreeData } from 'src/app/_models/tree-data.model';
 import { TreeModel } from 'src/app/_models/tree.model';
+import { TreeService } from 'src/app/_services/tree.service';
 
 @Component({
   selector: 'app-flat',
@@ -23,26 +23,9 @@ export class FlatComponent implements OnInit {
   selectionTree = new SelectionModel<TreeModel>(false, []);
 
   dataChange = new BehaviorSubject<TreeModel[]>([]);
-  responseTree: TreeModel[] = [
-    {
-      id: 0,
-      name: 'string',
-      checked: false,
-      iconId: 'string',
-      write: false,
-      children: [],
-    }
-  ];
-  sendResponse: TreeData[] = [
-    {
-      checked: false,
-      iconId: '',
-      id: 0,
-      name: '',
-      parentId: 0,
-      write: false
-    }
-  ];
+  responseTree: TreeModel[] = [];
+  sendResponse: TreeData[] = [];
+  olddata: TreeData[] = [];
 
   treeControl: FlatTreeControl<FlatNode>;
   treeFlattener: MatTreeFlattener<TreeModel, FlatNode>;
@@ -50,43 +33,45 @@ export class FlatComponent implements OnInit {
   checklistSelection = new SelectionModel<FlatNode>(true);
 
   currentRow = -1;
-  constructor() {
+  constructor(private treeService:TreeService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<FlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-    this.sendResponse = FLAT_TREE_DATA.data;
-    this.responseTree = this.getNodeChildren(0, FLAT_TREE_DATA.data);
-    this.dataChange.next(this.responseTree);
-    if (this.treeControl.dataNodes) {
+    this.dataChange.subscribe(data => {
+      this.dataSource.data = data;
       this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
-    }
+      this.treeControl.expandAll();
+    });
 
-    // this.subscription = this.rolesService.selecedRoleId.subscribe(() => {
-    //   this.rolesService.getList(1).subscribe(
-    //     res => {
-    //       if (res.success) {
-    //         this.sendResponse = res.data;
-    //         this.responseTree = this.getNodeChildren(0, res.data);
-    //         this.dataChange.next(this.responseTree);
-    //         this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
-    //         this.treeControl.expandAll();
-    //       } else {
-    //         console.log(res.message);
-    //       }
-    //     });
-    // });
+
+    //this.subscription = this.rolesService.selecedRoleId.subscribe(() => {
+      this.treeService.getList().then(
+        (res: any) => {
+          if (res) {
+
+            this.olddata = res;
+            this.sendResponse = res;
+            
+            this.responseTree = this.getNodeChildren(0, res);
+            this.dataChange.next(this.responseTree);
+            // if (this.treeControl.dataNodes) {
+            //   this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+            // }
+
+            //this.treeControl.expandAll();
+          } else {
+            console.log(res);
+          }
+        });
+    //});
   }
   getLevel = (node: FlatNode) => node.level;
   isExpandable = (node: FlatNode) => node.expandable;
   getChildren = (node: TreeModel): TreeModel[] => node.children;
   hasChild = (_: number, nodeData: FlatNode) => nodeData.expandable;
   ngOnInit() {
-    this.dataChange.subscribe(data => {
-      this.dataSource.data = data;
-      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
-      this.treeControl.expandAll();
-    });
+
   }
 
   ngOnDestroy() {
@@ -139,6 +124,9 @@ export class FlatComponent implements OnInit {
 
   leafItemSelectionToggle(node: FlatNode): void {
     this.checklistSelection.toggle(node);
+
+    this.toggleReadStatus(node);
+
     this.checkAllParentsSelection(node);
   }
 
@@ -146,6 +134,7 @@ export class FlatComponent implements OnInit {
     let parent: FlatNode | null = this.getParentNode(node);
     while (parent) {
       this.checkRootNodeSelection(parent);
+      this.toggleReadStatus(parent);
       parent = this.getParentNode(parent);
     }
   }
@@ -180,20 +169,20 @@ export class FlatComponent implements OnInit {
 
 
   toggleWriteStatus(node: FlatNode) {
-
     let currentNode = this.sendResponse.find(x => x.id == node.id);
     if (currentNode) {
       currentNode.write = !currentNode.write;
       this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
-
   }
 
-  changeStatusChecked(node: FlatNode) {
-    (this.sendResponse) ? this.sendResponse[node.id - 1].checked = !this.sendResponse[node.id - 1].checked : null;
-    (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
+  toggleReadStatus(node: FlatNode) {
+    let currentNode = this.sendResponse.find(x => x.id == node.id);
+    if (currentNode) {
+      currentNode.checked = !currentNode.checked;
+      this.responseTree = this.getNodeChildren(0, this.sendResponse);
+    }
   }
-
 
 
   filterChanged(filterText: string) {
@@ -208,9 +197,7 @@ export class FlatComponent implements OnInit {
       else { filteredTreeData = this.responseTree; }
       this.dataChange.next(filteredTreeData);
     }
-
   }
-
 
   getObjects(array: TreeModel[], target: string) {
     return array.reduce((r, { id, name, checked, iconId, write, children = [] }) => {
@@ -226,14 +213,19 @@ export class FlatComponent implements OnInit {
     }, []);
   }
 
-
   save() {
-
-    console.log('sendResponse',this.sendResponse);
-
-    console.log('checklistSelection',this.checklistSelection);
-
+    console.log('sendResponse', this.sendResponse);
+    console.log('responseTree', this.responseTree);
   }
 
+  reset() {
+debugger;
+    this.responseTree = this.getNodeChildren(0, this.olddata);
+    this.dataChange.next(this.responseTree);
+
+
+    //console.log('treeControl', this.treeControl);
+    //console.log('dataSource', this.dataSource);
+  }
 
 }
