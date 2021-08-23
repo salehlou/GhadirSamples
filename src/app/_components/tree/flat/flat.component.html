@@ -13,7 +13,7 @@
                   <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
                      [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
                   </mat-checkbox>
-                  <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
+                  <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
                      matTooltip="دسترسی ویرایش">
                   </mat-slide-toggle>
                </span>
@@ -38,7 +38,7 @@
                      [indeterminate]="descendantsPartiallySelected(node)" [checked]="descendantsAllSelected(node)"
                      matTooltip="دسترسی نمایش">
                   </mat-checkbox>
-                  <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
+                  <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
                      matTooltip="دسترسی ویرایش">
                   </mat-slide-toggle>
                </span>
