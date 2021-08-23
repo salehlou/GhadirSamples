@@ -1,0 +1,11 @@
+.example-card {
+  max-width: 96%;
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
+
+.fixscreensize {
+  height: calc(100vh - 128px);
+  overflow-y: auto;
+}

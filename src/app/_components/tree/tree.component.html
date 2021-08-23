@@ -1,9 +1,13 @@
-<mat-toolbar color="warn">
-   <button mat-icon-button routerLink='/tree/flat'>
-      <mat-icon>apartment</mat-icon>
-   </button>
-   <button mat-icon-button routerLink='/tree/nested'>
-      <mat-icon>apartment</mat-icon>
-   </button>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<div fxLayout="column">
+   <mat-toolbar color="warn">
+      <button mat-flat-button color="primary" routerLink='/tree/flat'>
+         flat
+      </button>
+      <button mat-flat-button color="primary" routerLink='/tree/nested'>
+         nested
+      </button>
+   </mat-toolbar>
+</div>
+<div fxLayout="column" class="fixscreensize">
+   <router-outlet></router-outlet>
+</div>

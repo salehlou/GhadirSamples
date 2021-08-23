@@ -5,22 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MaterialModule } from './material.module';
-import { JalaliMomentsPipe } from './_pip/jalali-moment.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    JalaliMomentsPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    BrowserAnimationsModule,
+
   ],
   exports: [
-    MaterialModule,
-
-
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,16 +3,15 @@
       [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}" (mouseover)="node.hovered = true"
       (mouseout)="node.hovered = false">
       <button mat-icon-button disabled></button>
-      <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
-         [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
-      </mat-checkbox>
       <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
       {{node.name}}
       <div style="display: flex; flex: 1; justify-content: flex-end;">
          <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
          <span style="display: flex; justify-content: flex-end;">
-
-            <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
+            <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
+               [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
+            </mat-checkbox>
+            <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
                matTooltip="دسترسی ویرایش">
             </mat-slide-toggle>
          </span>
@@ -26,9 +25,6 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
          </mat-icon>
       </button>
-      <mat-checkbox (change)="itemSelectionToggle(node)" [indeterminate]="descendantsPartiallySelected(node)"
-         [checked]="descendantsAllSelected(node)" matTooltip="دسترسی نمایش">
-      </mat-checkbox>
       <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
       <span>
          {{node.name}}
@@ -36,12 +32,13 @@
       <div style="display: flex; flex: 1; justify-content: flex-end;">
          <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
          <span style="display: flex; justify-content: flex-end;">
-            <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
+            <mat-checkbox (change)="itemSelectionToggle(node)" [indeterminate]="descendantsPartiallySelected(node)"
+               [checked]="descendantsAllSelected(node)" matTooltip="دسترسی نمایش">
+            </mat-checkbox>
+            <mat-slide-toggle class="mr-2" (change)="changeStatusWrite(node)" color="warn" [checked]="node.write"
                matTooltip="دسترسی ویرایش">
             </mat-slide-toggle>
          </span>
       </div>
    </mat-tree-node>
 </mat-tree>
-<button mat-button (click)="save()">Save</button>
-<button mat-button (click)="reset()">Reset</button>
