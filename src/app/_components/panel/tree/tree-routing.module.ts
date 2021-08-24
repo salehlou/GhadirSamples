@@ -6,20 +6,23 @@ import { SampleComponent } from './sample/sample.component';
 import { TreeComponent } from './tree.component';
 
 const routes: Routes = [
+
+
   {
-    path: '',
-    component: TreeComponent,
-    children: [
+    path: '', component: TreeComponent, children: [
+
       { path: 'flat', component: FlatComponent, data: { returnUrl: window.location.pathname } },
       { path: 'sample', component: SampleComponent, data: { returnUrl: window.location.pathname } },
       { path: 'nested', component: NestedComponent, data: { returnUrl: window.location.pathname } },
+
       { path: '', redirectTo: 'flat', pathMatch: 'full' },
       { path: '**', redirectTo: 'flat', pathMatch: 'full' },
-    ]
-  }
+
+    ],
+  },
+
 
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

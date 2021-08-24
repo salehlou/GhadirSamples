@@ -1,11 +1,5 @@
-<div class="dd" style="height: 100%;
-    background: aqua;  
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    right: 0;
-    top: 0;">
-  <mat-tree style="min-height: 95.8%;" [dataSource]="dataSource" [treeControl]="treeControl">
+<div>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding
       [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}" (mouseover)="node.hovered = true"
       (mouseout)="node.hovered = false">
