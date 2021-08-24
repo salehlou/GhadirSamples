@@ -1,0 +1,52 @@
+<div>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding
+      [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}" (mouseover)="node.hovered = true"
+      (mouseout)="node.hovered = false">
+      <button mat-icon-button disabled></button>
+      <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
+        [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
+      </mat-checkbox>
+      <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
+      {{node.name}}
+      <div style="display: flex; flex: 1; justify-content: flex-end;">
+        <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
+        <span style="display: flex; justify-content: flex-end;">
+
+          <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
+            matTooltip="دسترسی ویرایش">
+          </mat-slide-toggle>
+        </span>
+      </div>
+    </mat-tree-node>
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding
+      [ngClass]="{hovered: node.hovered, highlighted: selectionTree.isSelected(node)}" (mouseover)="node.hovered = true"
+      (mouseout)="node.hovered = false">
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <mat-checkbox (change)="itemSelectionToggle(node)" [indeterminate]="descendantsPartiallySelected(node)"
+        [checked]="descendantsAllSelected(node)" matTooltip="دسترسی نمایش">
+      </mat-checkbox>
+      <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
+      <span>
+        {{node.name}}
+      </span>
+      <div style="display: flex; flex: 1; justify-content: flex-end;">
+        <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
+        <span style="display: flex; justify-content: flex-end;">
+          <mat-slide-toggle class="mr-2" (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
+            matTooltip="دسترسی ویرایش">
+          </mat-slide-toggle>
+        </span>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+  <div style="position: sticky; bottom: 0; background-color: #ff3; z-index: 1;">
+    <button mat-button (click)="save()">Save</button>
+    <button mat-button (click)="reset()">Reset</button>
+  </div>
+
+</div>

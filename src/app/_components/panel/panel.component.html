@@ -1,0 +1,23 @@
+<div>
+   <mat-toolbar color="primary">
+      <span>طرح و پردازش غدیر</span>
+      <span class="example-spacer"></span>
+      <div>
+         <button mat-flat-button color="accent" class="example-icon" routerLink='table'>
+            <!-- <mat-icon>table_view</mat-icon> -->
+            گرید
+         </button>
+         <button mat-flat-button color="accent" class="example-icon" routerLink='tree'>
+            <!-- <mat-icon>apartment</mat-icon> -->
+            چارت
+         </button>
+         <button mat-flat-button color="accent" class="example-icon" routerLink='/auth'>
+            <!-- <mat-icon>apartment</mat-icon> -->
+            خروج
+         </button>
+      </div>
+   </mat-toolbar>
+</div>
+<div style="background-color: cornflowerblue; height: 100%;">
+   <router-outlet></router-outlet>
+</div>
