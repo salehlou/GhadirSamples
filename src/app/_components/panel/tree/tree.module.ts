@@ -7,6 +7,7 @@ import { FlatComponent } from './flat/flat.component';
 import { NestedComponent } from './nested/nested.component';
 import { MaterialModule } from 'src/app/material.module';
 import { SampleComponent } from './sample/sample.component';
+import { CdkTreeFlatSimpleComponent } from './cdk-tree-flat-simple/cdk-tree-flat-simple.component';
 
 
 
@@ -16,6 +17,7 @@ import { SampleComponent } from './sample/sample.component';
     FlatComponent,
     NestedComponent,
     SampleComponent,
+    CdkTreeFlatSimpleComponent,
   ],
   imports: [
     CommonModule,
