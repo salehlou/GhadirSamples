@@ -11,17 +11,19 @@ import { CdkTreeFlatSimpleComponent } from './cdk-tree-flat-simple/cdk-tree-flat
 
 
 
+
 @NgModule({
   declarations: [
     TreeComponent,
     FlatComponent,
     NestedComponent,
     SampleComponent,
-    CdkTreeFlatSimpleComponent,
+    CdkTreeFlatSimpleComponent
   ],
   imports: [
     CommonModule,
     TreeRoutingModule,
-    MaterialModule]
+    MaterialModule
+  ]
 })
 export class TreeModule { }

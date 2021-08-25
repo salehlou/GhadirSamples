@@ -11,9 +11,11 @@ const routes: Routes = [
 
       { path: 'tree', loadChildren: () => import('./tree/tree.module').then((m) => m.TreeModule) },
       { path: 'table', loadChildren: () => import('./table/table.module').then((m) => m.TableModule) },
+      { path: 'others', loadChildren: () => import('./others/others.module').then((m) => m.OthersModule) },
 
-      { path: '', redirectTo: 'tree', pathMatch: 'full' },
-      { path: '**', redirectTo: 'tree', pathMatch: 'full' },
+
+      { path: '', redirectTo: 'others', pathMatch: 'full' },
+      { path: '**', redirectTo: 'others', pathMatch: 'full' },
     ]
   },
 
