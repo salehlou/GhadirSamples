@@ -5,7 +5,7 @@
       (mouseover)="currentRow = node.id" (mouseout)="currentRow= -1" (mouseout)="node.hovered = false">
       <button mat-icon-button disabled></button>
       <mat-checkbox class="checklist-leaf-node" (change)="leafItemSelectionToggle(node)"
-        [checked]="checklistSelection.isSelected(node)" matTooltip="دسترسی نمایش">
+        [checked]="checkListSelection.isSelected(node)" matTooltip="دسترسی نمایش">
       </mat-checkbox>
       <img [hidden]="!node.iconId" [src]="node.iconId" alt="" class="iconIdSize">
       {{node.name}}
@@ -17,7 +17,7 @@
         <span style="display: flex; flex: 1; justify-content: flex-end;"> </span>
         <span style="display: flex; justify-content: flex-end;">
           <mat-slide-toggle (change)="toggleWriteStatus(node)" color="warn" [checked]="node.write"
-            [disabled]="!checklistSelection.isSelected(node)" matTooltip="دسترسی ویرایش">
+            [disabled]="!checkListSelection.isSelected(node)" matTooltip="دسترسی ویرایش">
           </mat-slide-toggle>
         </span>
       </div>

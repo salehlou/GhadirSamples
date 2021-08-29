@@ -31,7 +31,7 @@ export class FlatComponent implements OnInit {
   treeControl: FlatTreeControl<FlatNode>;
   treeFlattener: MatTreeFlattener<TreeModel, FlatNode>;
   dataSource: MatTreeFlatDataSource<TreeModel, FlatNode>;
-  checklistSelection = new SelectionModel<FlatNode>(true);
+  checkListSelection = new SelectionModel<FlatNode>(true);
 
   currentRow = -1;
   constructor(private treeService: TreeService) {
@@ -41,7 +41,7 @@ export class FlatComponent implements OnInit {
 
     this.dataChange.subscribe(data => {
       this.dataSource.data = data;
-      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.read));
+      this.checkListSelection.select(...this.treeControl.dataNodes.filter((node) => node.read));
       this.treeControl.expandAll();
     });
 
@@ -56,11 +56,6 @@ export class FlatComponent implements OnInit {
 
           this.responseTree = this.getNodeChildren(0, res);
           this.dataChange.next(this.responseTree);
-          // if (this.treeControl.dataNodes) {
-          //   this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
-          // }
-
-          //this.treeControl.expandAll();
         } else {
           console.log(res);
         }
@@ -104,25 +99,26 @@ export class FlatComponent implements OnInit {
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
       descendants.length > 0 &&
-      descendants.every((child) => this.checklistSelection.isSelected(child));
+      descendants.every((child) => this.checkListSelection.isSelected(child));
     return descAllSelected;
   }
 
   descendantsPartiallySelected(node: FlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    const result = descendants.some((child) => this.checklistSelection.isSelected(child));
+    const result = descendants.some((child) => this.checkListSelection.isSelected(child));
     return result && !this.descendantsAllSelected(node);
   }
 
   itemSelectionToggle(node: FlatNode): void {
-    this.checklistSelection.toggle(node);
-    this.toggleReadStatus(node);
-
+    this.checkListSelection.toggle(node);
+    
     const descendants = this.treeControl.getDescendants(node);
-
-    this.checklistSelection.isSelected(node)
-      ? this.checklistSelection.select(...descendants)
-      : this.checklistSelection.deselect(...descendants);
+    
+    this.checkListSelection.isSelected(node)
+    ? this.checkListSelection.select(...descendants)
+    : this.checkListSelection.deselect(...descendants);
+    
+    this.toggleReadStatus(node);
 
     descendants.forEach((item, index) => {
       this.toggleReadStatus(item);
@@ -132,7 +128,7 @@ export class FlatComponent implements OnInit {
   }
 
   leafItemSelectionToggle(node: FlatNode): void {
-    this.checklistSelection.toggle(node);
+    this.checkListSelection.toggle(node);
     this.toggleReadStatus(node);
 
     this.checkAllParentsSelection(node);
@@ -148,17 +144,17 @@ export class FlatComponent implements OnInit {
   }
 
   checkRootNodeSelection(node: FlatNode): void {
-    const nodeSelected = this.checklistSelection.isSelected(node);
+    const nodeSelected = this.checkListSelection.isSelected(node);
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
       descendants.length > 0 &&
       descendants.every((child) => {
-        return this.checklistSelection.isSelected(child);
+        return this.checkListSelection.isSelected(child);
       });
     if (nodeSelected && !descAllSelected) {
-      this.checklistSelection.deselect(node);
+      this.checkListSelection.deselect(node);
     } else if (!nodeSelected && descAllSelected) {
-      this.checklistSelection.select(node);
+      this.checkListSelection.select(node);
     }
   }
 
@@ -177,17 +173,16 @@ export class FlatComponent implements OnInit {
 
 
   toggleWriteStatus(node: FlatNode) {
-    let currentNode = this.sendResponse.find(x => x.id == node.id);
+    let currentNode = this.treeControl.dataNodes.find(x => x.id == node.id);
     if (currentNode) {
       currentNode.write = !currentNode.write;
     }
   }
 
   toggleReadStatus(node: FlatNode) {
-    let currentNode = this.sendResponse.find(x => x.id == node.id);
+    let currentNode = this.treeControl.dataNodes.find(x => x.id == node.id);
     if (currentNode) {
       currentNode.read = !currentNode.read;
-      this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
   }
 
@@ -223,13 +218,15 @@ export class FlatComponent implements OnInit {
   save() {
     // console.log('sendResponse', this.sendResponse);
     //console.log('responseTree', this.responseTree);
-    //console.log('this.checklistSelection.selected', this.checklistSelection.selected);
+    //console.log('this.checklistSelection.selected', this.checkListSelection.selected);
 
-    let nodesWithReadStatus = this.sendResponse.filter(c => c.read != true);
-    console.log('nodesWithReadStatus', nodesWithReadStatus);
+    //console.log('treeControll', this.treeControl);
 
-    let nodesWithWriteStatus = this.sendResponse.filter(c => c.write == true);
-    console.log('nodesWithWriteStatus', nodesWithWriteStatus);
+    let nodesWithReadStatus = this.treeControl.dataNodes.filter(c => c.read == true);
+    console.log('nodesWithReadStatus:', nodesWithReadStatus);
+
+    let nodesWithWriteStatus = this.treeControl.dataNodes.filter(c => c.write == true);
+    console.log('nodesWithWriteStatus:', nodesWithWriteStatus);
 
   }
 
