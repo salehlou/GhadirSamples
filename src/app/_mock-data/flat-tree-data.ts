@@ -5,7 +5,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
    message: '',
    data: [
       {
-         checked: false,
+         read: false,
          iconId: 'data:image/png;base64,' + saeedicon,
          id: 1,
          name: "رابط کاربری",
@@ -13,7 +13,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: 'data:image/png;base64,' + saeedicon,
          id: 2,
          name: "اطلاعات پایه",
@@ -21,7 +21,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 3,
          name: "زیر سیستم ها",
@@ -29,7 +29,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 4,
          name: "سطوح دسترسی و کاربران",
@@ -37,7 +37,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 5,
          name: "تنظیمات",
@@ -45,7 +45,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 6,
          name: "گزارشات",
@@ -53,7 +53,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 7,
          name: "تنظیمات کاربری",
@@ -61,7 +61,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 8,
          name: "بخش ها",
@@ -69,7 +69,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 9,
          name: "پرسنل",
@@ -77,7 +77,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 10,
          name: "ایستگاه های کنترل",
@@ -85,7 +85,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 11,
          name: "دستگاه ها",
@@ -93,7 +93,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 12,
          name: "اکسس کنترل",
@@ -101,7 +101,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 13,
          name: "ارباب رجوع",
@@ -109,7 +109,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 14,
          name: "صندوق امانات",
@@ -117,7 +117,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 15,
          name: "پارکینگ",
@@ -125,7 +125,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 16,
          name: "مدیریت باشگاه های ورزشی",
@@ -133,7 +133,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 17,
          name: "گروه های دسترسی",
@@ -141,7 +141,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 18,
          name: "درب ها",
@@ -149,7 +149,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 19,
          name: "آسانسور ها",
@@ -157,7 +157,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 20,
          name: "مراجعین",
@@ -165,7 +165,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 21,
          name: "آفیش",
@@ -173,7 +173,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 22,
          name: "اقلام همراه",
@@ -181,7 +181,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 23,
          name: "لیست سیاه",
@@ -189,7 +189,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 24,
          name: "کاربران",
@@ -197,7 +197,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 25,
          name: "نقش ها",
@@ -205,7 +205,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 26,
          name: "سرور",
@@ -213,7 +213,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 27,
          name: "سایر نرم افزار ها",
@@ -221,7 +221,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 28,
          name: "پایه",
@@ -229,7 +229,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 29,
          name: "اکسس کنترل",
@@ -237,7 +237,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 30,
          name: "ارباب رجوع",
@@ -245,7 +245,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 31,
          name: "صندوق امانات",
@@ -253,7 +253,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 32,
          name: "پارکینگ",
@@ -261,7 +261,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 33,
          name: "کاربران",
@@ -269,7 +269,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 34,
          name: "تغییر کلمه عبور",
@@ -277,7 +277,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 35,
          name: "شخصی سازی",
@@ -285,7 +285,7 @@ export const FLAT_TREE_DATA: BaseResponse<TreeData[]> = {
          write: false
       },
       {
-         checked: false,
+         read: false,
          iconId: '',
          id: 36,
          name: "جریان کاری",

@@ -26,7 +26,7 @@ export class SampleComponent implements OnInit, OnDestroy {
     {
       id: 0,
       name: 'string',
-      checked: false,
+      read: false,
       iconId: 'string',
       write: false,
       children: [],
@@ -34,7 +34,7 @@ export class SampleComponent implements OnInit, OnDestroy {
   ];
   sendResponse: TreeData[] = [
     {
-      checked: false,
+      read: false,
       iconId: '',
       id: 0,
       name: '',
@@ -58,7 +58,7 @@ export class SampleComponent implements OnInit, OnDestroy {
     this.responseTree = this.getNodeChildren(0, FLAT_TREE_DATA.data);
     this.dataChange.next(this.responseTree);
     if (this.treeControl.dataNodes) {
-      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.read));
     }
 
     // this.subscription = this.rolesService.selecedRoleId.subscribe(() => {
@@ -83,7 +83,7 @@ export class SampleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dataChange.subscribe(data => {
       this.dataSource.data = data;
-      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.read));
       this.treeControl.expandAll();
     });
   }
@@ -97,11 +97,11 @@ export class SampleComponent implements OnInit, OnDestroy {
     const result = treeData.filter((data) => data.parentId === parentId);
     if (result.length === 0) {
       return result.map<TreeModel>((data) => {
-        return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: [] };
+        return { id: data.id, name: data.name, read: data.read, write: data.write, iconId: data.iconId, children: [] };
       });
     } else {
       return result.map<TreeModel>((data) => {
-        return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: this.getNodeChildren(data.id, treeData) };
+        return { id: data.id, name: data.name, read: data.read, write: data.write, iconId: data.iconId, children: this.getNodeChildren(data.id, treeData) };
       });
     }
   }
@@ -109,7 +109,7 @@ export class SampleComponent implements OnInit, OnDestroy {
   transformer = (node: TreeModel, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
-      id: node.id, name: node.name, level, checked: node.checked, write: node.write, iconId: node.iconId,
+      id: node.id, name: node.name, level, read: node.read, write: node.write, iconId: node.iconId,
     };
   }
 
@@ -193,7 +193,7 @@ export class SampleComponent implements OnInit, OnDestroy {
   }
 
   getObjects(array: TreeModel[], target: string) {
-    return array.reduce((r, { id, name, checked, iconId, write, children = [] }) => {
+    return array.reduce((r, { id, name, read: read, iconId, write, children = [] }) => {
       children = this.getObjects(children, target);
       if (name.includes(target)) {
         r.push();
@@ -212,7 +212,7 @@ export class SampleComponent implements OnInit, OnDestroy {
   }
 
   changeStatusChecked(node: FlatNode) {
-    (this.sendResponse) ? this.sendResponse[node.id - 1].checked = !this.sendResponse[node.id - 1].checked : null;
+    (this.sendResponse) ? this.sendResponse[node.id - 1].read = !this.sendResponse[node.id - 1].read : null;
     (this.sendResponse) ? this.responseTree = this.getNodeChildren(0, this.sendResponse) : null;
   }
 

@@ -41,7 +41,7 @@ export class FlatComponent implements OnInit {
 
     this.dataChange.subscribe(data => {
       this.dataSource.data = data;
-      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.checked));
+      this.checklistSelection.select(...this.treeControl.dataNodes.filter((node) => node.read));
       this.treeControl.expandAll();
     });
 
@@ -84,11 +84,11 @@ export class FlatComponent implements OnInit {
     const result = treeData.filter((data) => data.parentId === parentId);
     if (result.length === 0) {
       return result.map<TreeModel>((data) => {
-        return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: [] };
+        return { id: data.id, name: data.name, read: data.read, write: data.write, iconId: data.iconId, children: [] };
       });
     } else {
       return result.map<TreeModel>((data) => {
-        return { id: data.id, name: data.name, checked: data.checked, write: data.write, iconId: data.iconId, children: this.getNodeChildren(data.id, treeData) };
+        return { id: data.id, name: data.name, read: data.read, write: data.write, iconId: data.iconId, children: this.getNodeChildren(data.id, treeData) };
       });
     }
   }
@@ -96,7 +96,7 @@ export class FlatComponent implements OnInit {
   transformer = (node: TreeModel, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
-      id: node.id, name: node.name, level, checked: node.checked, write: node.write, iconId: node.iconId,
+      id: node.id, name: node.name, level, read: node.read, write: node.write, iconId: node.iconId,
     };
   }
 
@@ -124,7 +124,7 @@ export class FlatComponent implements OnInit {
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
 
-    descendants.forEach((item,index) => {
+    descendants.forEach((item, index) => {
       this.toggleReadStatus(item);
     })
 
@@ -186,7 +186,7 @@ export class FlatComponent implements OnInit {
   toggleReadStatus(node: FlatNode) {
     let currentNode = this.sendResponse.find(x => x.id == node.id);
     if (currentNode) {
-      currentNode.checked = !currentNode.checked;
+      currentNode.read = !currentNode.read;
       this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
   }
@@ -207,7 +207,7 @@ export class FlatComponent implements OnInit {
   }
 
   getObjects(array: TreeModel[], target: string) {
-    return array.reduce((r, { id, name, checked, iconId, write, children = [] }) => {
+    return array.reduce((r, { id, name, read: checked, iconId, write, children = [] }) => {
       children = this.getObjects(children, target);
       if (name.includes(target)) {
         r.push();
@@ -221,14 +221,14 @@ export class FlatComponent implements OnInit {
   }
 
   save() {
-    //console.log('sendResponse', this.sendResponse);
+    // console.log('sendResponse', this.sendResponse);
     //console.log('responseTree', this.responseTree);
     //console.log('this.checklistSelection.selected', this.checklistSelection.selected);
 
-    let nodesWithReadStatus = this.sendResponse.filter(c=>c.checked == true);
+    let nodesWithReadStatus = this.sendResponse.filter(c => c.read != true);
     console.log('nodesWithReadStatus', nodesWithReadStatus);
-    
-    let nodesWithWriteStatus = this.sendResponse.filter(c=>c.write == true);
+
+    let nodesWithWriteStatus = this.sendResponse.filter(c => c.write == true);
     console.log('nodesWithWriteStatus', nodesWithWriteStatus);
 
   }

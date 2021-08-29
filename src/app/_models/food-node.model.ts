@@ -1,5 +1,5 @@
 export interface FoodNode {
-   checked: boolean;
+   read: boolean;
    children: FoodNode[];
    iconId: string;
    id: number;
