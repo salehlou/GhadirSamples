@@ -118,6 +118,7 @@ export class FlatComponent implements OnInit {
       descendants.forEach((item, index) => {
         this.toggleReadStatus(item, true);
       })
+      this.checkAllParentsSelection(node, true);
     }
     else {
       this.checkListSelection.deselect(...descendants);
@@ -125,9 +126,9 @@ export class FlatComponent implements OnInit {
       descendants.forEach((item, index) => {
         this.toggleReadStatus(item, false);
       })
+      this.checkAllParentsSelection(node, false);
     }
 
-    this.checkAllParentsSelection(node);
   }
 
   leafItemSelectionToggle(node: FlatNode): void {
@@ -137,11 +138,17 @@ export class FlatComponent implements OnInit {
     this.checkAllParentsSelection(node);
   }
 
-  checkAllParentsSelection(node: FlatNode): void {
+  checkAllParentsSelection(node: FlatNode, toggle?: boolean): void {
     let parent: FlatNode | null = this.getParentNode(node);
     while (parent) {
       this.checkRootNodeSelection(parent);
-      this.toggleReadStatus(parent);
+
+      if (toggle == null) {
+        this.toggleReadStatus(parent);
+      } else {
+        this.toggleReadStatus(parent, toggle);
+      }
+
       parent = this.getParentNode(parent);
     }
   }
