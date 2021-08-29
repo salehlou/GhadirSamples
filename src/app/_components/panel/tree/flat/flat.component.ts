@@ -124,9 +124,9 @@ export class FlatComponent implements OnInit {
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
 
-      descendants.forEach((item,index)=>{
-        this.toggleReadStatus(item);
-      })
+    descendants.forEach((item,index) => {
+      this.toggleReadStatus(item);
+    })
 
     this.checkAllParentsSelection(node);
   }
@@ -180,14 +180,13 @@ export class FlatComponent implements OnInit {
     let currentNode = this.sendResponse.find(x => x.id == node.id);
     if (currentNode) {
       currentNode.write = !currentNode.write;
-      this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
   }
 
   toggleReadStatus(node: FlatNode) {
     let currentNode = this.sendResponse.find(x => x.id == node.id);
     if (currentNode) {
-      currentNode.checked = !node.checked;
+      currentNode.checked = !currentNode.checked;
       this.responseTree = this.getNodeChildren(0, this.sendResponse);
     }
   }
@@ -222,8 +221,16 @@ export class FlatComponent implements OnInit {
   }
 
   save() {
-    console.log('sendResponse', this.sendResponse);
+    //console.log('sendResponse', this.sendResponse);
     //console.log('responseTree', this.responseTree);
+    //console.log('this.checklistSelection.selected', this.checklistSelection.selected);
+
+    let nodesWithReadStatus = this.sendResponse.filter(c=>c.checked == true);
+    console.log('nodesWithReadStatus', nodesWithReadStatus);
+    
+    let nodesWithWriteStatus = this.sendResponse.filter(c=>c.write == true);
+    console.log('nodesWithWriteStatus', nodesWithWriteStatus);
+
   }
 
   reset() {
