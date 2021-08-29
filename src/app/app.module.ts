@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MaterialModule } from './material.module';
+import { SharedModule } from './shared.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -16,13 +17,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule,
+    SharedModule,
     BrowserAnimationsModule,
+    CommonModule,
 
   ],
-  exports: [
-    MaterialModule
-  ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })

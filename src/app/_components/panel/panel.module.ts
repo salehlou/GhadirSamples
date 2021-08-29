@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { PanelRoutingModule } from './panel-routing.module';
 import { PanelComponent } from './panel.component';
-import { MaterialModule } from 'src/app/material.module';
+import { SharedModule } from 'src/app/shared.module';
 import { OthersComponent } from './others/others.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -13,9 +13,9 @@ import { OthersComponent } from './others/others.component';
     OthersComponent
   ],
   imports: [
-    CommonModule,
     PanelRoutingModule,
-    MaterialModule
+    SharedModule,
+    CommonModule,
   ]
 })
 export class PanelModule { }

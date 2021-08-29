@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { BadgesampleComponent } from './badgesample/badgesample.component';
-import { MaterialModule } from 'src/app/material.module';
 import { OthersRoutingModule } from './others-routing.module';
+
+import { SharedModule } from 'src/app/shared.module';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
-    BadgesampleComponent
+    BadgesampleComponent,
+
   ],
   imports: [
-    CommonModule,
+
     OthersRoutingModule,
-    MaterialModule
+    SharedModule,
+    CommonModule,
+  ],
+  providers: [
+
   ]
 })
 export class OthersModule { }

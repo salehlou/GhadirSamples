@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { BadgesampleComponent } from './badgesample/badgesample.component';
 import { OthersComponent } from './others.component';
 
+
 const routes: Routes = [
 
   {
     path: '', component: OthersComponent, children: [
 
       { path: 'badge', component: BadgesampleComponent, data: { returnUrl: window.location.pathname } },
+      // { path: 'date-time', component: DateTimePickerComponent, data: { returnUrl: window.location.pathname } },
+
 
       { path: '', redirectTo: 'badge', pathMatch: 'full' },
       { path: '**', redirectTo: 'badge', pathMatch: 'full' },
