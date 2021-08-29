@@ -1,3 +1,4 @@
+import { DataTimeComponent } from './data-time/data-time.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BadgesampleComponent } from './badgesample/badgesample.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
     path: '', component: OthersComponent, children: [
 
       { path: 'badge', component: BadgesampleComponent, data: { returnUrl: window.location.pathname } },
-      // { path: 'date-time', component: DateTimePickerComponent, data: { returnUrl: window.location.pathname } },
+      { path: 'date-time', component: DataTimeComponent, data: { returnUrl: window.location.pathname } },
 
 
       { path: '', redirectTo: 'badge', pathMatch: 'full' },
